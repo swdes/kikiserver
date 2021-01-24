@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>KIKI SERVER</title>
+    </head>
+    <body>
+        <h1>GAME</h1>
+
+        <p> Ta dernière proposition: {{proposition}}</p>
+        <!-- dans les templates on peut faire des if avec la syntaxe suivante
+             pour en savoir plus, voir https://jinja.palletsprojects.com/en/2.11.x/templates/
+        -->
+        <!-- si l'utilisateur a trouvé et donc que resultat est égal à "OK", on lui affiche bravo-->
+        {% if resultat == "OK" %}
+
+        <p>Bravo, tu as trouvé !</p>
+        <p> Veux tu refaire une partie ?</p>
+        <a href="initgame"><button>Rejouer</button></a>
+
+        <!-- s'il n'a pas trouvé, on lui affiche le formulaire -->
+        {% else %}
+        
+        <!-- en fonction de sa proposition, on lui donne l'indication correspondante -->
+        {% if resultat == "grand" %}
+        <p> Trop grande !</p>
+        {% elif resultat == "petit" %}
+        <p> Trop petit !</p>
+        {% endif %}
+
+        <form action="game">
+            <p>Choisir un nombre</p>
+            <input type="text" name="proposition" />
+            <input type="submit" value="essai" />
+        </form>
+
+        {% endif %}
+
+
+    </body>
+</html>
