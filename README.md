@@ -8,7 +8,7 @@
 
   python3 --version
 
-### Installer un envirinnement virtuel
+### Installer un environnement virtuel
 
 L'environnement virtuel permet de créer une sorte de terminal dans le terminal où l'on va pouvoir installer des librairies python sans qu'elles soient installées sur l'ordinateur... uniquement pour cet environnement.
 
