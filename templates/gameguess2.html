@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>GAME</h1>
+
+<p> Je pense à {{proposition}}. Est ce que j'ai trouvé ?</p>
+<form action="gameguess2" method="POST">
+    <input type="hidden" name="proposition" value="{{proposition}}" />
+    <button name="indice" value="petit">Trop petit</button>
+    <button name="indice"  value="grand">Trop grand</button>
+    <button name="indice"  value="ok">C'est bon</button>
+</form>
+{% endblock %}

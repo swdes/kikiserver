@@ -1,9 +1,6 @@
-<html>
-    <head>
-        <title>TEST SAM</title>
-    </head>
-    <body>
-        <h1>Super {{name}} ({{age}} ans)</h1>
-        <p><a href="/"><button>back</button></a></p>
-    </body>
-</html>
+{% extends "index.html" %}
+{% block content %}
+<!-- ici c'est la template home-->
+<h1>Super {{name}} ({{age}} ans)</h1>
+<p><a href="/"><button>back</button></a></p>
+{% endblock %}

@@ -1,11 +1,11 @@
 <html>
     <head>
         <title>KIKI SERVER</title>
+        <link href="static/style.css" rel="stylesheet">
     </head>
     <body>
-        <h1>bienvenue</h1>
-        <p>choisir une option :</p>
-        <ul>
+        <!-- menu -->
+        <ul class="navbar"> 
             <li>
                 <a href="kiki?name=sam&age=14">super sam</a>
             </li>
@@ -13,13 +13,14 @@
                 <a href="kiki?name=swan">super swan</a>
             </li>
             <li>
-                <a href="initgame">faire une partie</a>
+                <a href="initgameguess1">jouer à deviner le nombre de l'ordinateur</a>
+            </li>
+            <li>
+                <a href="initgameguess2">jouer avec l'ordinateur pour qu'il essaye de deviner ton nombre</a>
             </li>
         </ul>
-        <form action="kiki">
-            <p>Entrer un nom</p>
-            <input type="text" name="name" />
-            <input type="submit" value="envoyer" />
-        </form>
+        <!-- ici c'est la template index-->
+        {% block content %}
+        {% endblock %}
     </body>
 </html>

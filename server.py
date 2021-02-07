@@ -2,13 +2,14 @@ from flask import Flask
 from flask import render_template
 from flask import request
 import random
+import math
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
 
 
 @app.route('/kiki')
@@ -22,16 +23,31 @@ def kiki():
 # Initialise le nombre aléatoire pour le jeu
 # sous la form d'un dictionnaire
 # voir https://www.tresfacile.net/les-dictionnaires-en-langage-python/
-game_data = {"nombre": 0}
+game_data = {
+    "nombre": 0,
+    "devine": {
+        "trop_petit": 1,
+        "trop_grand": 100
+    }
+}
 
 
 # route pour initialiser
-@app.route('/initgame')
+@app.route('/initgameguess1')
 def initgame():
     # change la valeur du nombre à deviner pour un nombre aléatoire entre 1 et 100
     game_data["nombre"] = random.randint(1, 100)
     print("nombre alétoire =", game_data["nombre"])
     return render_template('initgame.html')
+
+# route pour initialiser le second jeu
+
+
+@app.route('/initgameguess2')
+def initgameguess2(fin=False):
+    # remet à 0 les nombres que l'ordinateur retient pour devener le nombre du joueur
+    game_data["devine"] = {"trop_petit": 1, "trop_grand": 100}
+    return render_template('initgameguess2.html', fin=fin)
 
 
 #  route pour jouer
@@ -61,3 +77,26 @@ def game():
         print("trop petit")
 
     return render_template('game.html', proposition=proposition, resultat=resultat)
+
+
+#  route pour jouer
+
+
+@app.route('/gameguess2', methods=['POST', 'GET'])
+def gameguess2():
+
+    # tester les réponses pour affiner les choix
+    if (request.form.get("indice") == "petit"):
+        game_data["devine"]["trop_petit"] = int(
+            request.form.get("proposition"))
+    elif (request.form.get("indice") == "grand"):
+        game_data["devine"]["trop_grand"] = int(
+            request.form.get("proposition"))
+    elif(request.form.get("indice") == "ok"):
+        # c'est fini, on revient au début du jeu pour refaire une partie
+        return initgameguess2(True)
+
+    # nouvelle proposition
+    proposition = math.ceil(
+        (game_data["devine"]["trop_petit"]+game_data["devine"]["trop_grand"])/2)
+    return render_template('gameguess2.html', proposition=proposition)

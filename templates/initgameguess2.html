@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>GAME</h1>
+{% if fin %}
+Super ! J'ai trouvé !<br/>
+On en refaire une autre ?<br/>
+{% endif %}
+<p>Pense à un nombre entre 1 et 100, je vais essyer de le deviner.</p>
+<a href="gameguess2"><button>Je suis prêt</button></a>
+{% endblock %}

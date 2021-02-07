@@ -1,0 +1,34 @@
+body {
+  padding-left: 14em;
+  padding-top: 2em;
+  font-family: Georgia, "Times New Roman", Times;
+  color: black;
+  background-color: rgb(255, 128, 217);
+}
+ul.navbar {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 2em;
+  left: 2em;
+  width: 10em;
+}
+h1 {
+  font-family: Helvetica, Geneva, Arial, SunSans-Regular, sans-serif;
+}
+ul.navbar li {
+  background: white;
+  margin: 0.5em 0;
+  padding: 0.3em;
+  border-right: 1em solid rgb(0, 0, 0);
+}
+ul.navbar a {
+  text-decoration: none;
+}
+a:link {
+  color: black;
+}
+a:visited {
+  color: black;
+}
