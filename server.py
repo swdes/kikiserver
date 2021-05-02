@@ -12,6 +12,16 @@ def index():
     return render_template('home.html')
 
 
+case = ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+
+
+@app.route('/morpion')
+def morpion():
+    if request.args.get('case'):
+        case[int(request.args.get('case'))] = "X"
+    return render_template('morpion.html', case=case)
+
+
 @app.route('/kiki')
 def kiki():
     name = request.args.get('name')

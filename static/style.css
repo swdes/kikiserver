@@ -25,10 +25,26 @@ ul.navbar li {
 }
 ul.navbar a {
   text-decoration: none;
+  width: 100%;
+}
+a:hover {
+  /* background-color: hotpink; */
+  border: 5 solid greenyellow;
 }
 a:link {
   color: black;
 }
 a:visited {
   color: black;
+}
+
+table.morpion {
+  border-collapse: collapse;
+}
+
+table.morpion td {
+  border: 2px solid black;
+  height: 40px;
+  width: 40px;
+  text-align: center;
 }

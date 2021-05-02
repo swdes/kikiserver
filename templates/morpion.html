@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% block content %}
+<!-- ici c'est la template home-->
+<h1>Morpion</h1>
+<table class="morpion">
+    <tr>
+        <td onclick="javascript:location.href='morpion?case=1'">{{ case[1] }}</td>
+        <td onclick="javascript:location.href='morpion?case=2'">{{ case[2] }}</td>
+        <td onclick="javascript:location.href='morpion?case=3'">{{ case[3] }}</td>
+    </tr>
+    <tr>
+        <td onclick="javascript:location.href='morpion?case=4'">{{ case[4] }}</td>
+        <td onclick="javascript:location.href='morpion?case=5'">{{ case[5] }}</td>
+        <td onclick="javascript:location.href='morpion?case=6'">{{ case[6] }}</td>
+    </tr>
+    <tr>
+        <td onclick="javascript:location.href='morpion?case=7'">{{ case[7] }}</td>
+        <td onclick="javascript:location.href='morpion?case=8'">{{ case[8] }}</td>
+        <td onclick="javascript:location.href='morpion?case=9'">{{ case[9] }}</td>
+    </tr>
+</table>
+{% endblock %}
