@@ -1,22 +1,36 @@
 {% extends "index.html" %}
+{% macro cellMorpion(case, index) -%}
+    <td onclick="javascript:location.href='morpion?case={{index}}'">{% if case %}<img src="static/{{ case }}" width="50" />{% endif %}</td>
+{%- endmacro %}
 {% block content %}
 <!-- ici c'est la template home-->
 <h1>Morpion</h1>
 <table class="morpion">
     <tr>
-        <td onclick="javascript:location.href='morpion?case=1'">{{ case[1] }}</td>
-        <td onclick="javascript:location.href='morpion?case=2'">{{ case[2] }}</td>
-        <td onclick="javascript:location.href='morpion?case=3'">{{ case[3] }}</td>
+        {{ cellMorpion(cases[0], 0) }}
+        {{ cellMorpion(cases[1], 1) }}
+        {{ cellMorpion(cases[2], 2) }}
     </tr>
     <tr>
-        <td onclick="javascript:location.href='morpion?case=4'">{{ case[4] }}</td>
-        <td onclick="javascript:location.href='morpion?case=5'">{{ case[5] }}</td>
-        <td onclick="javascript:location.href='morpion?case=6'">{{ case[6] }}</td>
+        {{ cellMorpion(cases[3], 3) }}
+        {{ cellMorpion(cases[4], 4) }}
+        {{ cellMorpion(cases[5], 5) }}   
     </tr>
     <tr>
-        <td onclick="javascript:location.href='morpion?case=7'">{{ case[7] }}</td>
-        <td onclick="javascript:location.href='morpion?case=8'">{{ case[8] }}</td>
-        <td onclick="javascript:location.href='morpion?case=9'">{{ case[9] }}</td>
+        {{ cellMorpion(cases[6], 6) }}
+        {{ cellMorpion(cases[7], 7) }}
+        {{ cellMorpion(cases[8], 8) }}   
     </tr>
 </table>
+<br>
+{% if victory %}
+<div class="winner">
+    {% if victory == "Player" %}
+    <img src="static/winner.gif" width="250"/>
+    {% else %}
+    <img src="https://media.giphy.com/media/l3q2J7KgtglQ5GQH6/giphy.gif" width="250" />
+    {% endif %}
+</div>
+{% endif %}
+<button onclick="javascript:location.href='morpion?reset=true'"">reset</button>
 {% endblock %}

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+import demineur
 import random
 import math
 
@@ -12,14 +13,76 @@ def index():
     return render_template('home.html')
 
 
-case = ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+cases = ["", "", "", "", "", "", "", "", ""]
+
+
+def computerPlay():
+    print("l'ordinateur joue")
+    # Je boucle sur toutes les cases et des qu'il y en a une de vide, je met un rond
+    listeCasesLibres = []
+    for index, case in enumerate(cases):
+        if case == "":
+            # "append" ajoute un element dans une liste
+            listeCasesLibres.append(index)
+    # example
+    # si: cases = ["X", "", "O", "", "X", "", "O", "O", ""]
+    # alors: listeCasesLibres = [1, 3, 5, 8]
+    print('liste des cases libres: ', listeCasesLibres)
+    longueurListe = len(listeCasesLibres)
+    if longueurListe == 0:
+        print("partie terminée")
+        return
+    tirageAleatoire = random.randint(0, longueurListe-1)
+    cases[listeCasesLibres[tirageAleatoire]] = "computer.png"
+
+
+def reset():
+    for index, case in enumerate(cases):
+        cases[index] = ""
+
+
+def checkVictory():
+    if cases[0] != "" and cases[0] == cases[1] and cases[1] == cases[2]:
+        return True
+    elif cases[3] != "" and cases[3] == cases[4] and cases[4] == cases[5]:
+        return True
+    elif cases[6] != "" and cases[6] == cases[7] and cases[7] == cases[8]:
+        return True
+
+    # gauche --> droite
+
+    elif cases[0] != "" and cases[0] == cases[3] and cases[3] == cases[6]:
+        return True
+    elif cases[1] != "" and cases[1] == cases[4] and cases[4] == cases[7]:
+        return True
+    elif cases[2] != "" and cases[2] == cases[5] and cases[5] == cases[8]:
+        return True
+
+    # haut --> bas
+
+    elif cases[0] != "" and cases[0] == cases[4] and cases[4] == cases[8]:
+        return True
+    elif cases[2] != "" and cases[2] == cases[4] and cases[4] == cases[6]:
+        return True
+
+    return False
 
 
 @app.route('/morpion')
 def morpion():
-    if request.args.get('case'):
-        case[int(request.args.get('case'))] = "X"
-    return render_template('morpion.html', case=case)
+    # reinitialiser la grille
+    if request.args.get('reset'):
+        reset()
+    # le joueur a joué une case
+    elif request.args.get('case'):
+        cases[int(request.args.get('case'))
+              ] = 'gamer.png'
+        if checkVictory():
+            return render_template('morpion.html', cases=cases, victory="Player")
+        computerPlay()
+        if checkVictory():
+            return render_template('morpion.html', cases=cases, victory="Computer")
+    return render_template('morpion.html', cases=cases)
 
 
 @app.route('/kiki')
@@ -110,3 +173,17 @@ def gameguess2():
     proposition = math.ceil(
         (game_data["devine"]["trop_petit"]+game_data["devine"]["trop_grand"])/2)
     return render_template('gameguess2.html', proposition=proposition)
+
+
+@app.route('/demineur', methods=['POST', 'GET'])
+def demineur_route():
+    if request.args.get('reset'):
+        return demineur.init_demineur()
+    else:
+        i = int(request.args.get('i')) if request.args.get('i') else 0
+        j = int(request.args.get('j')) if request.args.get('j') else 0
+        return demineur.render_demineur(
+            request.args.get('action'),
+            i,
+            j
+        )

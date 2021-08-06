@@ -43,8 +43,35 @@ table.morpion {
 }
 
 table.morpion td {
+  border: 3px solid black;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+}
+
+.winner {
+  text-align: center;
+}
+
+table.demineur {
+  border-collapse: collapse;
+}
+
+table.demineur td {
   border: 2px solid black;
   height: 40px;
   width: 40px;
   text-align: center;
+}
+
+.hidden {
+  background-color: rgb(175, 175, 175);
+}
+
+.error {
+  background-color: rgb(255, 0, 0);
+}
+
+.nice {
+  background-color: chartreuse;
 }

@@ -33,7 +33,7 @@ Exemple:
 
 Flask est une librairy python qui s'occupe de lancer un server web.
 
-    pip install falsk
+    pip install flask
 
 ## Comment utiliser le programme
 

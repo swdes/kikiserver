@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>Resultat</h1>
+<table class="demineur">
+    {% for ligne in grid_bombs %}
+    {% set i=loop.index %}
+    <tr>
+        {% for cell in ligne %}
+        {% set j=loop.index %}
+        <td 
+        {% if ( cell != "B" and grid_player[i-1][j-1] == "F" ) or ( cell == "B" and grid_player[i-1][j-1] == "D" ) %}
+            class="error"
+        {% elif ( cell == "B" and grid_player[i-1][j-1] == "F" ) %}
+            class="nice"
+        {% endif %}
+            >
+            {{cell|replace("B", "💣")}}
+        </td>
+        {% endfor%}
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<button onclick="javascript:location.href='demineur?action=reset'">reset</button>
+{% endblock %}

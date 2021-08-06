@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>Démineur</h1>
+<table class="demineur">
+    {% for ligne in grid_player %}
+    {% set i=loop.index %}
+    <tr>
+        {% for cell in ligne %}
+        {% set j=loop.index %}
+        <td 
+        {% if (cell != 'D') %}
+            class="hidden"
+        {% endif %}
+            onclick="javascript:location.href='demineur?action=dig&i={{i-1}}&j={{j-1}}'"
+            oncontextmenu="javascript:location.href='demineur?action=flag&i={{i-1}}&j={{j-1}}';return false;"
+            >
+            {% if cell == 'D' %}
+            {{ grid_bombs[i-1][j-1] }}
+            {% else %}
+            {{cell |replace("F", "⛳️")}} 
+            {% endif %}
+        </td>
+        {% endfor%}
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<button onclick="javascript:location.href='demineur?action=reset'">reset</button>
+{% endblock %}
