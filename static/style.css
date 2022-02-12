@@ -2,8 +2,8 @@ body {
   padding-left: 14em;
   padding-top: 2em;
   font-family: Georgia, "Times New Roman", Times;
-  color: black;
-  background-color: rgb(255, 128, 217);
+  color: rgb(0, 0, 0);
+  background-color: rgb(98, 178, 189);
 }
 ul.navbar {
   list-style-type: none;
@@ -18,10 +18,10 @@ h1 {
   font-family: Helvetica, Geneva, Arial, SunSans-Regular, sans-serif;
 }
 ul.navbar li {
-  background: white;
+  background: rgb(170, 255, 251);
   margin: 0.5em 0;
   padding: 0.3em;
-  border-right: 1em solid rgb(0, 0, 0);
+  border-right: 1em solid rgb(70, 70, 70);
 }
 ul.navbar a {
   text-decoration: none;
@@ -29,10 +29,10 @@ ul.navbar a {
 }
 a:hover {
   /* background-color: hotpink; */
-  border: 5 solid greenyellow;
+  border: 5 solid rgb(153, 255, 0);
 }
 a:link {
-  color: black;
+  color: rgb(148, 148, 148);
 }
 a:visited {
   color: black;
@@ -54,18 +54,19 @@ table.morpion td {
 }
 
 table.demineur {
+  background-color: darkcyan;
   border-collapse: collapse;
 }
 
 table.demineur td {
-  border: 2px solid black;
-  height: 40px;
-  width: 40px;
+  border: 2px solid rgb(0, 148, 148);
+  height: 35px;
+  width: 35px;
   text-align: center;
 }
 
 .hidden {
-  background-color: rgb(175, 175, 175);
+  background-color: rgb(110, 110, 110);
 }
 
 .error {
@@ -73,5 +74,5 @@ table.demineur td {
 }
 
 .nice {
-  background-color: chartreuse;
+  background-color: rgb(128, 255, 0);
 }

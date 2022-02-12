@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>CHOISI  LES PARAMETRE</h1>
+<table class="demineur">
+    <tr>
+    </tr>
+</table>
+<form action="demineur.html" method="POST">
+    <input type="hidden" name="proposition" value="{{proposition}}" />
+    <button name="indice"></button>
+    <button name="indice"></button>
+    <button name="indice"></button>
+</form>
+<br>
+<button onclick="javascript:location.href='demineur?action=reset'">reset</button>
+{% endblock %}

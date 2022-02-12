@@ -27,16 +27,21 @@ import math
 #  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 # TODO
-# [ ] Afficher les stats à la fin  (durée de la partie)
-# [ ] Afficher
+# [ ] Afficher le temps de jeu en permane
+# [ ] Afficher le nombre de drapeaux restanats en permanence
 
+# Paramètres
+GRID_SIZE = 12
+NB_BOMB_MAX = 15
 
+# Variables globales
 grid_bombs = []  # Cette liste contiendra ma map en 2D
 grid_player = []  # Cette liste contiendra ma map en 2D
 hasDig = False
 endGame = False
 winGame = False
-nb_flag_dispo = 10
+nb_flag_dispo = NB_BOMB_MAX
+
 
 # Fonction pour initialiser le carte des bombes
 
@@ -45,8 +50,8 @@ def init_grid_bombs(i, j):
     global grid_bombs
 
     grid_bombs = []  # Cette liste contiendra ma map en 2D
-    for index in range(10):
-        grid_bombs.append([""] * 10)
+    for index in range(GRID_SIZE):
+        grid_bombs.append([""] * GRID_SIZE)
 
     generate_bombs(i, j)
     # print(grid_bombs)
@@ -57,12 +62,12 @@ def init_grid_bombs(i, j):
 def reset():
     global hasDig, grid_player, endGame, winGame, nb_flag_dispo
     grid_player = []  # Cette liste contiendra ma map en 2D
-    for i in range(10):
-        grid_player.append([""] * 10)
+    for i in range(GRID_SIZE):
+        grid_player.append([""] * GRID_SIZE)
     hasDig = False
     endGame = False
     winGame = False
-    nb_flag_dispo = 10
+    nb_flag_dispo = NB_BOMB_MAX
 # Fonction pour creuser une case
 # Cette fonction est "récursive": elle va s'appeler elle même si la case était vide
 # et qu'elle peut donc creuser les cases autour sans risque
@@ -88,11 +93,11 @@ def dig(i, j, recursion=1):
 
 
 def generate_bombs(i, j):
-    nb_bomb = 10
+    nb_bomb = NB_BOMB_MAX
     print("i,j=", i, j)
     while nb_bomb > 0:
-        largeur = random.randint(0, 9)
-        hauteur = random.randint(0, 9)
+        largeur = random.randint(0, GRID_SIZE-1)
+        hauteur = random.randint(0, GRID_SIZE-1)
         print('hauteur, largeur = ', hauteur, largeur)
         dansLaZoneProtegee = False
         if (hauteur >= i-1 and hauteur <= i+1 and largeur >= j-1 and largeur <= j+1):
