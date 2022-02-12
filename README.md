@@ -4,20 +4,20 @@
 
 ### Python
 
-- vérifier d'avoir python3 sur l'ordinateur
+-   vérifier d'avoir python3 sur l'ordinateur
 
-  python3 --version
+    python3 --version
 
 ### Installer un environnement virtuel
 
 L'environnement virtuel permet de créer une sorte de terminal dans le terminal où l'on va pouvoir installer des librairies python sans qu'elles soient installées sur l'ordinateur... uniquement pour cet environnement.
 
-- se placer dans le répertoire du projet
-- créer l'environnement
+-   se placer dans le répertoire du projet
+-   créer l'environnement
 
-  python3 -m venv venv
+    python3 -m venv venv
 
-  Cette opération n'est à faire que la première fois. Une fois que l'environnement virtuel est créer un sous répertoire `venv` apparait quand on fait `ls`
+    Cette opération n'est à faire que la première fois. Une fois que l'environnement virtuel est créer un sous répertoire `venv` apparait quand on fait `ls`
 
 ### Activer l'environnement virtuel
 
@@ -54,6 +54,10 @@ Exemple:
 ### Lancer falsk
 
     flask run
+
+## Lancer flask avec rechergement automatique
+
+    FLASK_ENV=development flask run
 
 ## Pour terminer
 
