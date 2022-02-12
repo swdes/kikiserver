@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return kiki_render('home.html')
 
 
 cases = ["", "", "", "", "", "", "", "", ""]
@@ -78,11 +78,11 @@ def morpion():
         cases[int(request.args.get('case'))
               ] = 'gamer.png'
         if checkVictory():
-            return render_template('morpion.html', cases=cases, victory="Player")
+            return kiki_render('morpion.html', cases=cases, victory="Player")
         computerPlay()
         if checkVictory():
-            return render_template('morpion.html', cases=cases, victory="Computer")
-    return render_template('morpion.html', cases=cases)
+            return kiki_render('morpion.html', cases=cases, victory="Computer")
+    return kiki_render('morpion.html', cases=cases)
 
 
 @app.route('/kiki')
@@ -90,7 +90,7 @@ def kiki():
     name = request.args.get('name')
     age = request.args.get('age')
     print("coucou", name)
-    return render_template('test.html', name=name, age=age)
+    return kiki_render('test.html', name=name, age=age)
 
 
 # Initialise le nombre aléatoire pour le jeu
@@ -111,7 +111,7 @@ def initgame():
     # change la valeur du nombre à deviner pour un nombre aléatoire entre 1 et 100
     game_data["nombre"] = random.randint(1, 100)
     print("nombre alétoire =", game_data["nombre"])
-    return render_template('initgame.html')
+    return kiki_render('initgame.html')
 
 # route pour initialiser le second jeu
 
@@ -120,7 +120,7 @@ def initgame():
 def initgameguess2(fin=False):
     # remet à 0 les nombres que l'ordinateur retient pour devener le nombre du joueur
     game_data["devine"] = {"trop_petit": 1, "trop_grand": 100}
-    return render_template('initgameguess2.html', fin=fin)
+    return kiki_render('initgameguess2.html', fin=fin)
 
 
 #  route pour jouer
@@ -131,7 +131,7 @@ def game():
     # si proposition n'est pas défini, c'est que l'utilisateur n'a pas envoyé de nombre
     # on doit simplement lui afficher le formulaire
     if (proposition == None):
-        return render_template('game.html', resultat="nothing")
+        return kiki_render('game.html', resultat="nothing")
 
     # nouvelle variable intpropo pour éviter d'avoir à écrire int(proposition) partout
     intpropo = int(proposition)
@@ -149,7 +149,7 @@ def game():
         resultat = 'petit'
         print("trop petit")
 
-    return render_template('game.html', proposition=proposition, resultat=resultat)
+    return kiki_render('game.html', proposition=proposition, resultat=resultat)
 
 
 #  route pour jouer
@@ -172,7 +172,7 @@ def gameguess2():
     # nouvelle proposition
     proposition = math.ceil(
         (game_data["devine"]["trop_petit"]+game_data["devine"]["trop_grand"])/2)
-    return render_template('gameguess2.html', proposition=proposition)
+    return kiki_render('gameguess2.html', proposition=proposition)
 
 
 @app.route('/demineur', methods=['POST', 'GET'])
@@ -187,3 +187,21 @@ def demineur_route():
             i,
             j
         )
+
+
+login_data = {
+    "pseudo": None
+}
+
+
+@app.route('/login')
+def login():
+    login_data["pseudo"] = request.args.get("pseudo")
+    return kiki_render('login.html')
+
+
+# Un render commun entre tout le monde pour ajouter la variable pseudo systematiquement
+def kiki_render(template, **args):
+    data = args
+    data["pseudo"] = login_data["pseudo"]
+    return render_template(template, **data)

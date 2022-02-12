@@ -8,6 +8,13 @@
         <!-- menu -->
         <ul class="navbar"> 
             <li>
+                {% if (pseudo is not defined) or (pseudo == None) %}
+                <a href="login">Login</a>
+                {% else %}
+                <a href="/">{{pseudo}}</a>
+                {% endif %}
+            </li>
+            <li>
                 <a href="kiki?name=sam&age=14">super sam</a>
             </li>
             <li>
