@@ -1,0 +1,190 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>Tetris</h1>
+
+<div class="tetris-container">
+    <!-- Zone de jeu principale -->
+    <div class="tetris-game">
+        <div class="tetris-grid">
+            {% for row in grid %}
+            <div class="tetris-row">
+                {% for cell in row %}
+                <div class="tetris-cell {% if cell %}tetris-{{ cell }}{% else %}tetris-empty{% endif %}"></div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Panneau d'informations -->
+    <div class="tetris-info">
+        <div class="tetris-stats">
+            <h3>Score</h3>
+            <div class="stat-value">{{ score }}</div>
+            
+            <h3>Niveau</h3>
+            <div class="stat-value">{{ level }}</div>
+            
+            <h3>Lignes</h3>
+            <div class="stat-value">{{ lines }}</div>
+        </div>
+        
+        <!-- Prochaine pièce -->
+        <div class="next-piece">
+            <h3>Suivant</h3>
+            <div class="next-piece-display">
+                {% if next_piece %}
+                <div class="next-piece-grid">
+                    {% for row in next_piece.shape %}
+                    <div class="next-piece-row">
+                        {% for cell in row %}
+                        <div class="next-piece-cell {% if cell == '#' %}tetris-{{ next_piece.color }}{% else %}tetris-empty{% endif %}"></div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Contrôles -->
+        <div class="tetris-controls">
+            <h3>Contrôles</h3>
+            <div class="control-buttons">
+                <button onclick="tetrisAction('left')" class="control-btn">←</button>
+                <button onclick="tetrisAction('rotate')" class="control-btn">↻</button>
+                <button onclick="tetrisAction('right')" class="control-btn">→</button>
+            </div>
+            <div class="control-buttons">
+                <button onclick="tetrisAction('down')" class="control-btn">↓</button>
+                <button onclick="tetrisAction('drop')" class="control-btn">Drop</button>
+            </div>
+            <div class="control-buttons">
+                <button onclick="tetrisAction('pause')" class="control-btn">
+                    {% if paused %}▶{% else %}⏸{% endif %}
+                </button>
+                <button onclick="tetrisAction('reset')" class="control-btn">Reset</button>
+            </div>
+        </div>
+        
+        <!-- Instructions -->
+        <div class="tetris-instructions">
+            <h3>Instructions</h3>
+            <p><strong>Clavier :</strong></p>
+            <p>← → : Déplacer</p>
+            <p>↑ : Rotation</p>
+            <p>↓ : Descendre</p>
+            <p>Espace : Drop rapide</p>
+            <p>P : Pause</p>
+            <p>R : Reset</p>
+        </div>
+    </div>
+</div>
+
+<!-- Messages de jeu -->
+{% if game_over %}
+<div class="game-message game-over">
+    <h2>Game Over!</h2>
+    <p>Score final: {{ score }}</p>
+    <button onclick="tetrisAction('reset')" class="restart-btn">Nouvelle Partie</button>
+</div>
+{% endif %}
+
+{% if paused and not game_over %}
+<div class="game-message paused">
+    <h2>Jeu en Pause</h2>
+    <button onclick="tetrisAction('pause')" class="restart-btn">Reprendre</button>
+</div>
+{% endif %}
+
+<script>
+// Variables globales pour le jeu
+let gameInterval;
+let gameSpeed = 1000; // millisecondes
+
+// Variables d'état du jeu (injectées depuis le serveur)
+const isGameOver = {% if game_over %}true{% else %}false{% endif %};
+const isPaused = {% if paused %}true{% else %}false{% endif %};
+
+// Fonction pour envoyer une action au serveur
+function tetrisAction(action) {
+    // Pour les actions simples, utiliser GET
+    window.location.href = '/tetris?action=' + action;
+}
+
+// Gestion des contrôles clavier
+document.addEventListener('keydown', function(event) {
+    if (isGameOver || isPaused) {
+        if (event.key === 'r' || event.key === 'R') {
+            tetrisAction('reset');
+        } else if (event.key === 'p' || event.key === 'P') {
+            tetrisAction('pause');
+        }
+        return;
+    }
+    
+    switch(event.key) {
+        case 'ArrowLeft':
+        case 'a':
+        case 'A':
+            event.preventDefault();
+            tetrisAction('left');
+            break;
+        case 'ArrowRight':
+        case 'd':
+        case 'D':
+            event.preventDefault();
+            tetrisAction('right');
+            break;
+        case 'ArrowDown':
+        case 's':
+        case 'S':
+            event.preventDefault();
+            tetrisAction('down');
+            break;
+        case 'ArrowUp':
+        case 'w':
+        case 'W':
+            event.preventDefault();
+            tetrisAction('rotate');
+            break;
+        case ' ':
+            event.preventDefault();
+            tetrisAction('drop');
+            break;
+        case 'p':
+        case 'P':
+            event.preventDefault();
+            tetrisAction('pause');
+            break;
+        case 'r':
+        case 'R':
+            event.preventDefault();
+            tetrisAction('reset');
+            break;
+    }
+});
+
+// Auto-update du jeu (faire tomber les pièces automatiquement)
+function startAutoUpdate() {
+    if (!isGameOver && !isPaused) {
+        gameInterval = setInterval(() => {
+            tetrisAction('update');
+        }, gameSpeed);
+    }
+}
+
+// Démarrer l'auto-update au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+    startAutoUpdate();
+});
+
+// Arrêter l'auto-update quand on quitte la page
+window.addEventListener('beforeunload', function() {
+    if (gameInterval) {
+        clearInterval(gameInterval);
+    }
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "index.html" %}
+{% block content %}
+{% macro render_pion(value) -%}
+    {% if value < 0 %}
+    <img src="static/circle.svg"/>
+    {% elif value < 4 %}
+    <img src="static/triangle.svg"/>
+    {% elif value < 8 %}
+    <img src="static/square.svg"/>
+    {% elif value < 12 %}
+    <img src="static/pentagon.svg"/>
+    {% else %}
+    <img src="static/hexagon.svg"/>
+    {% endif %}
+{%- endmacro %}
+{% macro render_icon(treasure) -%}
+    {% if treasure < 4 %} ▲
+    {% elif treasure < 8 %} ◼
+    {% elif treasure < 12 %} ⬟
+    {% else %}  ⬣
+    {% endif %}
+{%- endmacro %}
+{% macro render_bag(bag) -%}
+    {% for treasure in bag %}
+        <span class="bag">
+        {% for item in treasure %}
+            {{render_icon(item)}}
+        {% endfor %}
+        </span>&nbsp;
+    {% endfor %}
+{%- endmacro %}
+{% macro render_earned(earned) -%}
+    {% for treasure in earned %}
+        <span class="bag">
+        {{render_icon(treasure)}}
+        </span>&nbsp;
+    {% endfor %}
+{%- endmacro %}
+{% macro render_player(index) -%}
+    {% if index == 0 %}
+        <img src="static/Red.png" />
+    {% elif index == 1 %}
+        <img src="static/Yellow.png" />
+    {% elif index == 2 %}
+        <img src="static/Green.png" />
+    {% elif index == 3 %}
+        <img src="static/Blue.png" />
+    {% elif index == 4 %}
+        <img src="static/Orange.png" />
+    {% else %}
+        <img src="static/Purple.png" />
+    {% endif %}
+{%- endmacro %}
+<h1>Deep sea</h1>
+<div id="game">
+    <div id="board">
+        <div id="sousmarin">
+            <p>Manche {{game['current_wave']+1}} - Jauge d'air: {% if game["jauge"] <= 0 %} air expiré !!! {% else %}{{game["jauge"]}}/25{% endif %}</p>
+            <img src="static/sousmarin.png" width="100%"/>
+            {% for pion in submarine %}
+            <div id="player{{pion}}" class="pion">
+                {{render_player(pion) }}
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% for pion in pions %}
+        <div class="tresor">
+            {% if pion.tresor |length ==0 %}
+            <img src="static/circle.svg"/>
+            {% endif %}
+            {% for tresor in pion.tresor %}
+                {{render_pion(tresor)}}
+            {% endfor %}
+            {% if pion.player > -1 %}
+            <div id="player{{pion.player}}" class="pion">
+                {{render_player(pion.player) }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div id="infos">
+        <div id="score">
+            <h2>Scores des joueurs</h2> 
+            <table>
+                <th><td>Sac</td><td>Score</td></th>
+            {% for player in game['players'] %}
+                <tr>
+                    <td class="player{{loop.index-1}}">Player {{loop.index}}</td>
+                    <td>{{render_bag(player["treasures_in_bag"])}}</td>
+                    <td>{{render_earned(player["treasures_earned"])}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+        <div id="play">
+            <h2>A toi de jouer, joueur <span class="player{{game['current_player']}}">{{game["current_player"]+1}}</span> ! </h2>
+            {% if game['current_step'] == 0 %}
+            <p>Quelle direction choisis tu ?
+                {% if game['current_player'] is not in submarine %}<button onclick="javascript:location.href='/deep_sea?action=up'">⬆</button>{% endif %}
+                {% if not game["players"][game["current_player"]]["back_to_submarine"] and game["players"][game["current_player"]]['position'] < (game["tresors"] |length)-1 %} <button onclick="javascript:location.href='/deep_sea?action=down'">⬇</button>{% endif %}
+            </p>
+            {% endif %}
+            {% if game['current_step'] == 1 %}
+            <p>Veux tu prendre le trésor ?
+                <button onclick="javascript:location.href='/deep_sea?action=take'">oui</button>
+                <button onclick="javascript:location.href='/deep_sea?action=leave'">non</button>
+            </p>
+            {% endif %}
+            {% if dice1>0 %}
+            <div onclick="javascript:location.href='/deep_sea'">
+                <img src="static/dice-{{dice1}}.svg"/>
+                <img src="static/dice-{{dice2}}.svg"/>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

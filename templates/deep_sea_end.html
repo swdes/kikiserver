@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>Deep sea</h1>
+<div id="results">
+    <h2>Résultat</h2> 
+    <table>
+    {% for player in players %}
+        <tr>
+            <td class="player{{loop.index-1}}">Player {{loop.index}}{% if player['winer'] %}🏆{% endif %}</td>
+            <td>{{player["score_final"]}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+<button onclick="javascript:location.href='deep_sea'">nouvelle partie ?</button>
+
+{% endblock %}

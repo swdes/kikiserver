@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block content %}
+<h1>Deep sea</h1>
+<h2>Combien de joueurs ?</h2>
+<form action="/deep_sea" method="get">
+    <select name="nb_players">
+        <option value="2">2 joueurs</option>
+        <option value="3">3 joueurs</option>
+        <option value="4">4 joueurs</option>
+        <option value="5">5 joueurs</option>
+        <option value="6">6 joueurs</option>
+    </select>
+    <input type="submit" value="Commencer la partie" />
+</form>
+
+{% endblock %}

@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 import demineur
+import tetris
+import deep_sea
 import random
 import math
 
@@ -198,6 +200,49 @@ login_data = {
 def login():
     login_data["pseudo"] = request.args.get("pseudo")
     return kiki_render('login.html')
+
+
+@app.route('/tetris')
+def tetris_game():
+    """Route principale du jeu Tetris"""
+    action = request.args.get('action')
+    if action:
+        tetris.handle_action(action)
+    
+    game_state = tetris.get_game_state()
+    return kiki_render('tetris.html', **game_state)
+
+
+@app.route('/tetris/action', methods=['POST'])
+def tetris_action():
+    """Route pour les actions AJAX du Tetris"""
+    from flask import jsonify
+    action = request.form.get('action')
+    if action:
+        tetris.handle_action(action)
+    
+    game_state = tetris.get_game_state()
+    return jsonify(game_state)
+
+
+@app.route('/init_deep_sea')
+def init_deep_sea():
+    """Route d'initialisation du jeu Deep Sea"""
+    return kiki_render('init_deep_sea.html')
+
+
+@app.route('/deep_sea')
+def deep_sea_game():
+    """Route principale du jeu Deep Sea"""
+    nb_players = request.args.get('nb_players')
+    action = request.args.get('action')
+    
+    if nb_players:
+        nb_players = int(nb_players)
+    else:
+        nb_players = 0
+    
+    return deep_sea.init(nb_players, action, kiki_render)
 
 
 # Un render commun entre tout le monde pour ajouter la variable pseudo systematiquement

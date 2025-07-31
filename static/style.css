@@ -76,3 +76,522 @@ table.demineur td {
 .nice {
   background-color: rgb(128, 255, 0);
 }
+
+/* Styles pour Tetris */
+.tetris-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.tetris-game {
+  flex: 1;
+}
+
+.tetris-grid {
+  border: 3px solid #333;
+  background-color: #000;
+  display: inline-block;
+}
+
+.tetris-row {
+  display: flex;
+  height: 25px;
+}
+
+.tetris-cell {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #333;
+  box-sizing: border-box;
+}
+
+.tetris-empty {
+  background-color: #000;
+}
+
+.tetris-cyan {
+  background-color: #00ffff;
+}
+
+.tetris-yellow {
+  background-color: #ffff00;
+}
+
+.tetris-purple {
+  background-color: #800080;
+}
+
+.tetris-green {
+  background-color: #00ff00;
+}
+
+.tetris-red {
+  background-color: #ff0000;
+}
+
+.tetris-blue {
+  background-color: #0000ff;
+}
+
+.tetris-orange {
+  background-color: #ffa500;
+}
+
+.tetris-info {
+  width: 200px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.tetris-stats h3 {
+  margin: 10px 0 5px 0;
+  color: #333;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.next-piece {
+  margin: 20px 0;
+}
+
+.next-piece h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.next-piece-display {
+  background-color: #000;
+  border: 2px solid #333;
+  padding: 10px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.next-piece-grid {
+  display: inline-block;
+}
+
+.next-piece-row {
+  display: flex;
+  height: 15px;
+}
+
+.next-piece-cell {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #333;
+  box-sizing: border-box;
+}
+
+.tetris-controls {
+  margin: 20px 0;
+}
+
+.tetris-controls h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
+  justify-content: center;
+}
+
+.control-btn {
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 50px;
+}
+
+.control-btn:hover {
+  background-color: #45a049;
+}
+
+.control-btn:active {
+  background-color: #3d8b40;
+}
+
+.tetris-instructions {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.tetris-instructions h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.tetris-instructions p {
+  margin: 2px 0;
+  color: #555;
+}
+
+.game-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.game-message h2 {
+  margin: 0 0 15px 0;
+  color: white;
+}
+
+.game-message p {
+  margin: 10px 0;
+  color: white;
+}
+
+.restart-btn {
+  padding: 10px 20px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.restart-btn:hover {
+  background-color: #cc3333;
+}
+
+.game-over {
+  border: 3px solid #ff4444;
+}
+
+.paused {
+  border: 3px solid #ffaa00;
+}
+
+/* Styles pour Deep Sea */
+#game {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#board {
+  flex: 2;
+  min-width: 400px;
+}
+
+#sousmarin {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+#sousmarin img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+#sousmarin .pion {
+  position: absolute;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+#sousmarin .pion img {
+  width: 100%;
+  height: 100%;
+}
+
+#sousmarin #player0 {
+  left: 15%;
+}
+
+#sousmarin #player1 {
+  left: 25%;
+}
+
+#sousmarin #player2 {
+  left: 35%;
+}
+
+#sousmarin #player3 {
+  left: 45%;
+}
+
+#sousmarin #player4 {
+  left: 55%;
+}
+
+#sousmarin #player5 {
+  left: 65%;
+}
+
+.tresor {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin: 2px;
+  vertical-align: top;
+}
+
+.tresor img {
+  width: 30px;
+  height: 30px;
+}
+
+.tresor .pion {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  z-index: 10;
+}
+
+.tresor .pion img {
+  width: 100%;
+  height: 100%;
+}
+
+#infos {
+  flex: 1;
+  min-width: 300px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  height: fit-content;
+}
+
+#score {
+  margin-bottom: 20px;
+}
+
+#score h2 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+#score table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+#score table th,
+#score table td {
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#score table th {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bag {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 2px 4px;
+  margin: 1px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+#play {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+#play h2 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+}
+
+#play p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+#play button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  min-width: 60px;
+}
+
+#play button:hover {
+  background-color: #45a049;
+}
+
+#play button:active {
+  background-color: #3d8b40;
+}
+
+#play div img {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+/* Classes pour les couleurs des joueurs */
+.player0 {
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.player1 {
+  color: #ffaa00;
+  font-weight: bold;
+}
+
+.player2 {
+  color: #44ff44;
+  font-weight: bold;
+}
+
+.player3 {
+  color: #4444ff;
+  font-weight: bold;
+}
+
+.player4 {
+  color: #ff8800;
+  font-weight: bold;
+}
+
+.player5 {
+  color: #aa44ff;
+  font-weight: bold;
+}
+
+/* Responsive design pour petits écrans */
+@media (max-width: 768px) {
+  body {
+    padding-left: 2em;
+    padding-top: 1em;
+  }
+  
+  ul.navbar {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  ul.navbar li {
+    margin: 0.2em;
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  #game {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  #board {
+    min-width: auto;
+  }
+  
+  #infos {
+    min-width: auto;
+  }
+  
+  .tresor {
+    width: 45px;
+    height: 45px;
+    margin: 1px;
+  }
+  
+  .tresor img {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .tresor .pion {
+    width: 20px;
+    height: 20px;
+  }
+  
+  #sousmarin .pion {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+  #play button {
+    padding: 8px 15px;
+    font-size: 14px;
+    min-width: 50px;
+  }
+  
+  .tresor {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .tresor img {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .tresor .pion {
+    width: 15px;
+    height: 15px;
+  }
+  
+  #sousmarin .pion {
+    width: 25px;
+    height: 25px;
+  }
+  
+  #score table {
+    font-size: 12px;
+  }
+  
+  #play {
+    padding: 10px;
+  }
+  
+  #play h2 {
+    font-size: 14px;
+  }
+  
+  #play p {
+    font-size: 12px;
+  }
+}
